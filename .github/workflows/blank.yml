@@ -15,7 +15,6 @@ jobs:
 
     - name: Configurar el entorno
       run: |
-        # Configura tu entorno de pruebas aquí, por ejemplo, instala las dependencias.
         npm install
       working-directory: ./tu-directorio-de-código
 
