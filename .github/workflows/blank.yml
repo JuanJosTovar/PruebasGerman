@@ -1,25 +1,25 @@
-name: Pruebas Unitarias
+name: Tests
 
 on:
   push:
     branches:
-      - main
+      - main # Reemplaza con tu rama principal
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Código
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Configurar el entorno
-      run: |
-        npm install
-      working-directory: ./tu-directorio-de-código
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # Puedes cambiar la versión de Node.js si es necesario
 
-    - name: Ejecutar Pruebas Unitarias
-      run: |
-        # Ejecuta tus pruebas unitarias aquí.
-        npm test
-      working-directory: ./tu-directorio-de-código
+      - name: Install dependencies
+        run: npm install # O yarn install si usas yarn
+
+      - name: Run tests
+        run: npm test # O yarn test si usas yarn
