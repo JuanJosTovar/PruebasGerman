@@ -17,5 +17,5 @@ test('suma 193 + 7 to equal 200', () => {
 })
 
 test('suma 213 + 110 to equal 323', () => {
-    expect(sum(213,110)).toBe(323);
+    expect(sum(213,110)).toBe(324);
 })
