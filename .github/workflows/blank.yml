@@ -1,25 +1,88 @@
-name: Tests
+name: Pruebas Unitarias
 
 on:
-  push:
+  pull_request:
     branches:
-      - main # Reemplaza con tu rama principal
+      - main
 
 jobs:
-  test:
+  pruebas_unitarias:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout del código
         uses: actions/checkout@v2
 
-      - name: Use Node.js
-        uses: actions/setup-node@v2
+      - name: Configurar entorno
+        run: |
+          # Configura tu entorno aquí
+
+      - name: Ejecutar pruebas unitarias
+        run: |
+          # Comando para ejecutar las pruebas unitarias
+
+  merge-blocking:
+    runs-on: ubuntu-latest
+    needs: pruebas_unitarias
+    steps:
+      - name: Verificar errores en pruebas unitarias
+        run: |
+          # Comando para verificar errores en las pruebas unitarias
+          # Puedes usar scripts o herramientas para esto
+
+      - name: Comentar en el PR si hay errores
+        if: ${{ failure() }}
+        uses: actions/github-script@v5
         with:
-          node-version: '14' # Puedes cambiar la versión de Node.js si es necesario
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const context = github.context;
+            const issueComment = context.issue;
+            github.issues.createComment({
+              ...issueComment,
+              body: 'Se encontraron errores en las pruebas unitarias. No se puede fusionar hasta que se corrijan.',
+            });
+name: Pruebas Unitarias
 
-      - name: Install dependencies
-        run: npm install # O yarn install si usas yarn
+on:
+  pull_request:
+    branches:
+      - main
 
-      - name: Run tests
-        run: npm test # O yarn test si usas yarn
+jobs:
+  pruebas_unitarias:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v2
+
+      - name: Configurar entorno
+        run: |
+          # Configura tu entorno aquí
+
+      - name: Ejecutar pruebas unitarias
+        run: |
+          # Comando para ejecutar las pruebas unitarias
+
+  merge-blocking:
+    runs-on: ubuntu-latest
+    needs: pruebas_unitarias
+    steps:
+      - name: Verificar errores en pruebas unitarias
+        run: |
+          # Comando para verificar errores en las pruebas unitarias
+          # Puedes usar scripts o herramientas para esto
+
+      - name: Comentar en el PR si hay errores
+        if: ${{ failure() }}
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const context = github.context;
+            const issueComment = context.issue;
+            github.issues.createComment({
+              ...issueComment,
+              body: 'Se encontraron errores en las pruebas unitarias. No se puede fusionar hasta que se corrijan.',
+            });
