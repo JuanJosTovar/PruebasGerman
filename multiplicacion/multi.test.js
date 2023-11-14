@@ -9,7 +9,7 @@ test('multiplica 10 * -8 to equal -80', () => {
 })
 
 test('multiplica 9 * 3 to equal 27', () => {
-    expect(multi(9,3)).toBe(27);
+    expect(multi(9,3)).toBe(1);
 })
 
 test('multiplica 100 * 6 to equal 600', () => {

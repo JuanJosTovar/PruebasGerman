@@ -1,7 +1,7 @@
 const mayus = require('./mayuscula.js');
 
 test('Verifica que de "hola" retorne "HOLA', () => {
-    expect(mayus("hola")).toBe("sapo");
+    expect(mayus("hola")).toBe("HOLA");
 })
 
 test('Verifica que de "dado" retorne "DADO', () => {
