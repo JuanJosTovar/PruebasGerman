@@ -30,7 +30,6 @@ jobs:
 
       - name: Run tests
         run: npm test # O yarn test si usas yarn
-        continue-on-error: true # Continuar incluso si las pruebas fallan
 
       - name: Check test results
         run: |

@@ -9,7 +9,7 @@ test('suma 42 + 4 to equal 46', () => {
 })
 
 test('suma 5 + 2 to equal 7', () => {
-    expect(sum(5,2)).toBe(7);
+    expect(sum(5,2)).toBe(10);
 })
 
 test('suma 193 + 7 to equal 200', () => {
