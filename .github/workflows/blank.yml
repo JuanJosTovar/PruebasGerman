@@ -1,48 +1,26 @@
-name: Tests
+name: unittest
 
 on:
-  workflow_run:
-    workflows: ["Tests"]
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  release:
     types:
-      - completed
+      - released
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - name: Build and Test
+        uses: docker/build-push-action@v2
         with:
-          persist-credentials: false
-
-      - name: Set Git Config
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14' # Puedes cambiar la versión de Node.js si es necesario
-
-      - name: Install dependencies
-        run: npm install # O yarn install si usas yarn
-
-      - name: Run tests
-        run: npm test # O yarn test si usas yarn
-
-# Este bloque se ejecutará solo después de que se complete el flujo de trabajo
-  on:
-    workflow_run:
-      types:
-        - completed
-
-  jobs:
-    handle-failure:
-      if: ${{ failure() }}
-      runs-on: ubuntu-latest
-
-      steps:
-        - name: Stop further execution on failure
-          run: echo "Workflow failed, no further actions will be performed."
+          context: .
+          push: false
+          load: true
+          tags: ${{ github.repository }}:${{ github.sha }}
+          build-args: TESTS=1

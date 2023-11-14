@@ -5,7 +5,7 @@ test('resta 500 - 20 to equal 480', () => {
 })
 
 test('resta 16 - 8 to equal 8', () => {
-    expect(rest(16,8)).toBe(8);
+    expect(rest(16,8)).toBe(1);
 })
 
 test('resta 5 - 2 to equal 3', () => {
