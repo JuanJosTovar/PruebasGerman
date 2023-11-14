@@ -1,9 +1,10 @@
 name: Tests
 
 on:
-  push:
-    branches:
-      - main # Reemplaza con tu rama principal
+  workflow_run:
+    workflows: ["Tests"]
+    types:
+      - completed
 
 jobs:
   test:
@@ -31,5 +32,17 @@ jobs:
       - name: Run tests
         run: npm test # O yarn test si usas yarn
 
-      - name: Check test results
-        run: exit $(npm test --silent || echo $?)
+# Este bloque se ejecutará solo después de que se complete el flujo de trabajo
+  on:
+    workflow_run:
+      types:
+        - completed
+
+  jobs:
+    handle-failure:
+      if: ${{ failure() }}
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Stop further execution on failure
+          run: echo "Workflow failed, no further actions will be performed."

@@ -5,7 +5,7 @@ test('Verifica que de el mensaje "Hola" retorne 4', () => {
 })
 
 test('Verifica que de el mensaje "mundo" retorne 5', () => {
-    expect(long("mundo")).toBe(10);
+    expect(long("mundo")).toBe(5);
 })
 
 test('Verifica que de el mensaje "Dios mio" retorne 8', () => {
