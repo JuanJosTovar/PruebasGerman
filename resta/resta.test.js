@@ -9,7 +9,7 @@ test('resta 16 - 8 to equal 8', () => {
 })
 
 test('resta 5 - 2 to equal 3', () => {
-    expect(rest(5,2)).toBe(1);
+    expect(rest(5,2)).toBe(3);
 })
 
 test('resta 89 - 10 to equal 79', () => {
