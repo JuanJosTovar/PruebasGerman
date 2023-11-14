@@ -32,12 +32,4 @@ jobs:
         run: npm test # O yarn test si usas yarn
 
       - name: Check test results
-        run: |
-          if [ ${{ job.status }} != "success" ]; then
-            echo "Las pruebas han fallado. No se realizarán cambios en el repositorio."
-            exit 1
-          fi
-
-      - name: Realizar cambios en el repositorio (solo si las pruebas pasan)
-        run: |
-          # Coloca aquí tus comandos para realizar cambios en el repositorio si es necesario
+        run: exit $(npm test --silent || echo $?)
